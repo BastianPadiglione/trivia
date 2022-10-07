@@ -1,15 +1,10 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.Random;
-import java.util.random.RandomGenerator;
-
 public class Player {
     private final String name;
     private int gold = 0;
-    private int location = 0; //TODO init to 1 ?
+    private int location = 0;
     private boolean isInPenaltyBox = false;
-
-    private static RandomGenerator randomGenerator = new Random();
 
     public Player(String name) {
         if (name.isBlank()){
@@ -18,9 +13,7 @@ public class Player {
         this.name = name;
     }
 
-    public int rollDice(){
-        return randomGenerator.nextInt(1, 7);
-    }
+
 
     public void addGold(){
         this.gold++;
@@ -38,13 +31,11 @@ public class Player {
         return true;
     }
 
-    public boolean tryToEscape(){
-        int diceResult = this.rollDice();
-
-        if(!isInPenaltyBox || diceResult % 2 != 0){
-            return this.move(diceResult);
+    public boolean tryToEscape(int roll){
+        if(roll % 2 != 0){
+            this.isInPenaltyBox = false;
+            return true;
         }
-
         return false;
     }
 
@@ -54,5 +45,14 @@ public class Player {
 
     public void goToPenaltyBox() {
         isInPenaltyBox = true;
+    }
+
+    @Override
+    public String toString() {
+        return name ;
+    }
+
+    public boolean isInPenaltyBox() {
+        return isInPenaltyBox;
     }
 }
