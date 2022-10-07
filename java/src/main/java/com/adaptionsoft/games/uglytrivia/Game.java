@@ -2,7 +2,6 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Game {
     ArrayList players = new ArrayList(); //TODO generic
@@ -31,29 +30,30 @@ public class Game {
 	public String createRockQuestion(int index){
 		return "Rock Question " + index;
 	} //TODO sert à rien
-	
+
+	public ArrayList getPlayers() {
+		return players;
+	}
+
 	public boolean isPlayable() {
-		return (howManyPlayers() >= 2);
+		return (playerNumber() >= 2);
 	} //TODO pas utilisé
 
-	public boolean add(String playerName) {
-		
-		
+	public void addPlayer(String playerName) {
 	    players.add(playerName);
-	    places[howManyPlayers()] = 0;
-	    purses[howManyPlayers()] = 0;
-	    inPenaltyBox[howManyPlayers()] = false;
+	    places[playerNumber()] = 0;
+	    purses[playerNumber()] = 0;
+	    inPenaltyBox[playerNumber()] = false;
 	    
 	    System.out.println(playerName + " was added");
 	    System.out.println("They are player number " + players.size());
-		return true;
 	}
 	
-	public int howManyPlayers() {
+	public int playerNumber() {
 		return players.size();
 	} //TODO rename
 
-	public void roll(int roll) {
+	public void rollDice(int roll) {
 		System.out.println(players.get(currentPlayer) + " is the current player");
 		System.out.println("They have rolled a " + roll);
 		
