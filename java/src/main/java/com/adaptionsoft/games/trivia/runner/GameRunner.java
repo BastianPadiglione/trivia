@@ -15,7 +15,15 @@ public class GameRunner {
 		aGame.add("Chet");
 		aGame.add("Pat");
 		aGame.add("Sue");
-		
+
+		aGame.add("Chet");
+		aGame.add("Pat");
+		aGame.add("Sue");
+
+		aGame.add("Chet");
+		aGame.add("Pat");
+		aGame.add("Sue");
+
 		Random rand = new Random();
 	
 		do {
