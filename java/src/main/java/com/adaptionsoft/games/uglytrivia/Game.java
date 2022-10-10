@@ -22,6 +22,8 @@ public class Game {
 
     private Player currentPlayer;
 
+    private final GameView gameView = new GameView();
+
     public Game(){
         for (int i = 0; i < QUESTION_NUMBER; i++) {
             popQuestions.addLast("Pop Question " + i);
@@ -47,9 +49,7 @@ public class Game {
         } else {
             players.add(new Player(playerName));
         }
-
-        System.out.println(playerName + " was added");
-        System.out.println("They are player number " + playerNumber());
+        gameView.printAddPlayer(playerName, playerNumber());
     }
 
     public int playerNumber() {
@@ -58,16 +58,15 @@ public class Game {
 
     public void playTurn() {
         int roll = this.rollDice();
-        System.out.println(currentPlayer + " is the current player");
-        System.out.println("They have rolled a " + roll);
+        gameView.printPlayTurn(currentPlayer,roll);
 
         if (this.currentPlayer.isInPenaltyBox()) {// in penalty box
-            System.out.println(this.currentPlayer + " is getting out of the penalty box");
+            gameView.printOutOfPenaltyBox(this.currentPlayer);
             if (this.currentPlayer.tryToEscape(roll)) {
                 this.currentPlayer.move(roll);
                 this.introduceNewQuestion();
             } else {
-                System.out.println(this.currentPlayer + " is not getting out of the penalty box");
+                gameView.printNotOutOfPenaltyBox(this.currentPlayer);
             }
         } else {//not in penalty box
             this.currentPlayer.move(roll);
@@ -80,14 +79,11 @@ public class Game {
     }
 
     private void introduceNewQuestion() {
-        System.out.println(this.currentPlayer
-                + "'s new location is "
-                + this.currentPlayer.getLocation());
-        System.out.println("The category is " + currentCategory());
+        gameView.printNewQuestion(this.currentPlayer, currentCategory());
         askQuestion();
     }
 
-    private void askQuestion() {
+    private void askQuestion() {//TODO view ??
         switch (currentCategory()) {
             case POP -> System.out.println(popQuestions.removeFirst());
             case SCIENCE -> System.out.println(scienceQuestions.removeFirst());
@@ -107,12 +103,8 @@ public class Game {
 
     public void rightAnswer() {
         if (!currentPlayer.isInPenaltyBox()) {//not in penalty box
-            System.out.println("Answer was correct!!!!");
             this.currentPlayer.addGold();
-            System.out.println(this.currentPlayer
-                    + " now has "
-                    + this.currentPlayer.getGold()
-                    + " Gold Coins.");
+            gameView.printRightAnswer(this.currentPlayer);
         }
     }
 
@@ -123,8 +115,7 @@ public class Game {
     }
 
     public void wrongAnswer() {
-        System.out.println("Question was incorrectly answered");
-        System.out.println(this.currentPlayer + " was sent to the penalty box");
+       gameView.printWrongAnswer(this.currentPlayer);
         this.currentPlayer.goToPenaltyBox();
     }
 

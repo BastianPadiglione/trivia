@@ -3,18 +3,14 @@ package com.adaptionsoft.games.trivia;
 
 import com.adaptionsoft.games.uglytrivia.Game;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-public class GameTest {
+class GameTest {
 
     @Test
-    public void givenStringShouldAddPlayer(){
+    void givenStringShouldAddPlayer(){
         Game game = new Game();
         game.addPlayer("Toto");
         game.addPlayer("Tata");

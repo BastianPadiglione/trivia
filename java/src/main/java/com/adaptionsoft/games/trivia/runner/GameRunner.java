@@ -5,8 +5,6 @@ import com.adaptionsoft.games.uglytrivia.Game;
 
 
 public class GameRunner {
-
-
     public static void main(String[] args) {
         Game aGame = new Game();
 
@@ -16,6 +14,4 @@ public class GameRunner {
 
         aGame.play();
     }
-
-
 }

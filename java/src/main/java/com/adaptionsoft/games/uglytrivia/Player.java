@@ -13,8 +13,6 @@ public class Player {
         this.name = name;
     }
 
-
-
     public void addGold(){
         this.gold++;
     }
@@ -23,6 +21,7 @@ public class Player {
         return gold;
     }
 
+    //TODO check caseNumber < 0
     public boolean move(int caseNumber){
         if (this.isInPenaltyBox){
             return false;
@@ -31,6 +30,7 @@ public class Player {
         return true;
     }
 
+    //TODO check roll < 0
     public boolean tryToEscape(int roll){
         if(roll % 2 != 0){
             this.isInPenaltyBox = false;
@@ -47,12 +47,12 @@ public class Player {
         isInPenaltyBox = true;
     }
 
+    public boolean isInPenaltyBox() {
+        return isInPenaltyBox;
+    }
+
     @Override
     public String toString() {
         return name ;
-    }
-
-    public boolean isInPenaltyBox() {
-        return isInPenaltyBox;
     }
 }
